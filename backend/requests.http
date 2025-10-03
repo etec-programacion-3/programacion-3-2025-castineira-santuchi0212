@@ -1,99 +1,123 @@
 ### Variables
-@baseUrl = http://localhost:8000/api
-@contentType = application/json
+@baseUrl = http://127.0.0.1:5000
+@apiUrl = {{baseUrl}}/api/products
 
-### Get all products
-GET {{baseUrl}}/products
-Content-Type: {{contentType}}
+### Root endpoint - Welcome message
+GET {{baseUrl}}/
+Content-Type: application/json
 
-### Get all products with pagination (skip 0, limit 10)
-GET {{baseUrl}}/products?skip=0&limit=10
-Content-Type: {{contentType}}
+###
 
-### Get a specific product by ID
-GET {{baseUrl}}/products/1
-Content-Type: {{contentType}}
+### Get all posiciones (with pagination)
+GET {{apiUrl}}?skip=0&limit=100
+Content-Type: application/json
 
-### Create a new product - Laptop Gaming
-POST {{baseUrl}}/products
-Content-Type: {{contentType}}
+###
+
+### Get all posiciones (without pagination parameters)
+GET {{apiUrl}}
+Content-Type: application/json
+
+###
+
+### Get specific posicion by ID
+GET {{apiUrl}}/1
+Content-Type: application/json
+
+###
+
+### Create new posicion
+POST {{apiUrl}}
+Content-Type: application/json
 
 {
-    "name": "Laptop Gaming",
-    "price": 1299.99,
-    "description": "Laptop gaming de alta gama con RTX 3080"
+  "titulo": "Gerente de Ventas",
+  "descripcion": "Responsable de liderar el equipo de ventas",
+  "salario_min": 50000.00,
+  "salario_max": 75000.00
 }
 
-### Create a new product - Monitor 4K
-POST {{baseUrl}}/products
-Content-Type: {{contentType}}
+###
+
+### Create another posicion
+POST {{apiUrl}}
+Content-Type: application/json
 
 {
-    "name": "Monitor 4K",
-    "price": 499.99,
-    "description": "Monitor 4K de 32 pulgadas"
+  "titulo": "Desarrollador Senior",
+  "descripcion": "Desarrollo de aplicaciones backend",
+  "salario_min": 70000.00,
+  "salario_max": 90000.00
 }
 
-### Create a new product - Teclado Mecánico
-POST {{baseUrl}}/products
-Content-Type: {{contentType}}
+###
+
+### Create posicion with minimal data
+POST {{apiUrl}}
+Content-Type: application/json
 
 {
-    "name": "Teclado Mecánico",
-    "price": 129.99,
-    "description": "Teclado mecánico RGB con switches Cherry MX"
+  "titulo": "Analista de Datos"
 }
 
-### Create a new product - Mouse Gaming
-POST {{baseUrl}}/products
-Content-Type: {{contentType}}
+###
+
+### Update posicion (complete)
+PUT {{apiUrl}}/1
+Content-Type: application/json
 
 {
-    "name": "Mouse Gaming",
-    "price": 79.99,
-    "description": "Mouse gaming inalámbrico con 16000 DPI"
+  "titulo": "Gerente de Ventas Regional",
+  "descripcion": "Responsable de liderar el equipo de ventas en la región sur",
+  "salario_min": 55000.00,
+  "salario_max": 80000.00
 }
 
-### Update a product
-PUT {{baseUrl}}/products/1
-Content-Type: {{contentType}}
+###
+
+### Partial update posicion (only salaries)
+PUT {{apiUrl}}/1
+Content-Type: application/json
 
 {
-    "name": "Laptop Gaming Pro",
-    "price": 1499.99,
-    "description": "Laptop gaming actualizada con RTX 3080 Ti"
+  "salario_min": 60000.00,
+  "salario_max": 90000.00
 }
 
-### Delete a product
-DELETE {{baseUrl}}/products/1
-Content-Type: {{contentType}}
+###
 
-### Error Cases
-
-### Try to get a non-existent product
-GET {{baseUrl}}/products/999
-Content-Type: {{contentType}}
-
-### Try to update a non-existent product
-PUT {{baseUrl}}/products/999
-Content-Type: {{contentType}}
+### Partial update posicion (only title)
+PUT {{apiUrl}}/2
+Content-Type: application/json
 
 {
-    "name": "Producto Inexistente",
-    "price": 99.99,
-    "description": "Este producto no existe"
+  "titulo": "Desarrollador Full Stack Senior"
 }
 
-### Try to delete a non-existent product
-DELETE {{baseUrl}}/products/999
-Content-Type: {{contentType}}
+###
 
-### Try to create a product with invalid data
-POST {{baseUrl}}/products
-Content-Type: {{contentType}}
+### Delete posicion
+DELETE {{apiUrl}}/1
+Content-Type: application/json
+
+###
+
+### Test 404 - Get non-existent posicion
+GET {{apiUrl}}/9999
+Content-Type: application/json
+
+###
+
+### Test 404 - Update non-existent posicion
+PUT {{apiUrl}}/9999
+Content-Type: application/json
 
 {
-    "name": "",
-    "price": -100,
-    "description": ""
-} 
+  "titulo": "Test Position"
+}
+
+###
+
+### Test 404 - Delete non-existent posicion
+DELETE {{apiUrl}}/9999
+Content-Type: application/json

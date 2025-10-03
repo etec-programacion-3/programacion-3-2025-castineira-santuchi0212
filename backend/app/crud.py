@@ -15,6 +15,6 @@ async def update_posicion(posicion_id: int, posicion: dict):
     await Posicion.filter(id=posicion_id).update(**posicion)
     return await get_posicion(posicion_id)
 
-async def delete_product(product_id: int):
-    deleted_count = await Product.filter(id=product_id).delete()
+async def delete_posicion(posicion_id: int):
+    deleted_count = await Posicion.filter(id=posicion_id).delete()
     return deleted_count > 0 
