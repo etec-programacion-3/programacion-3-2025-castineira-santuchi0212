@@ -2,15 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_db, close_db
-from app.routers import products
+from app.routers import departamentos, posiciones
 
 app = FastAPI(
-    title="Product API",
-    description="API for managing products",
+    title="Empleados API",
+    description="API para gestionar departamentos y posiciones",
     version="1.0.0"
 )
 
-# Configure CORS
+# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,8 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include routers
-app.include_router(products.router, prefix="/api/products", tags=["products"])
+# Incluir routers
+app.include_router(departamentos.router, prefix="/api/departments", tags=["departments"])
+app.include_router(posiciones.router, prefix="/api/positions", tags=["positions"])
 
 @app.on_event("startup")
 async def startup_event():
@@ -32,4 +33,4 @@ async def shutdown_event():
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the Product API"} 
+    return {"message": "Bienvenido a la API de Gestión de Recursos"}
