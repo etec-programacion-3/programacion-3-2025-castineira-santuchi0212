@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_db, close_db
-from app.routers import departamentos, posiciones
+from app.routers import departamentos, posiciones, empleados
 
 app = FastAPI(
     title="Empleados API",
@@ -22,6 +22,7 @@ app.add_middleware(
 # Incluir routers
 app.include_router(departamentos.router, prefix="/api/departments", tags=["departments"])
 app.include_router(posiciones.router, prefix="/api/positions", tags=["positions"])
+app.include_router(empleados.router, prefix="/api/employees", tags=["employees"])
 
 @app.on_event("startup")
 async def startup_event():

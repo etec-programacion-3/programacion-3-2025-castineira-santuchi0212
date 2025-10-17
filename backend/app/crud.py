@@ -1,4 +1,4 @@
-from app.models import Posicion, Departamento
+from app.models import Posicion, Departamento, Empleado
 
 # ===== FUNCIONES PARA DEPARTAMENTOS =====
 
@@ -46,4 +46,28 @@ async def update_posicion(posicion_id: int, posicion: dict):
 async def delete_posicion(posicion_id: int):
     """Elimina una posición"""
     deleted_count = await Posicion.filter(id=posicion_id).delete()
+    return deleted_count > 0
+
+# ===== FUNCIONES PARA EMPLEADOS =====
+
+async def get_empleado(empleado_id: int):
+    """Obtiene una posición por ID"""
+    return await Empleado.get_or_none(id=empleado_id)
+
+async def get_empleado(skip: int = 0, limit: int = 100):
+    """Obtiene una lista de empleados con paginación"""
+    return await Empleado.all().offset(skip).limit(limit)
+
+async def create_empleado(empleado: dict):
+    """Crea una nueva posición"""
+    return await Empleado.create(**empleado)
+
+async def update_empleado(empleado_id: int, empleado: dict):
+    """Actualiza un empleado existente"""
+    await Empleado.filter(id=empleado_id).update(**empleado)
+    return await get_empleado(empleado_id)
+
+async def delete_empleado(empleado_id: int):
+    """Elimina una empleado"""
+    deleted_count = await Empleado.filter(id=empleado_id).delete()
     return deleted_count > 0
