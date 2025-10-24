@@ -54,7 +54,7 @@ class Empleado(Model):
     ##Relaciones ForeignKey
 
     departamento = fields.ForeignKeyField('models.Departamento', related_name='empleados')
-    posicion = fields.ForeignKeyField('models.Posicion', related_name='empleados')
+    Posicion = fields.ForeignKeyField('models.Posicion', related_name='empleados')
     
     # Timestamps
     creado_en = fields.DatetimeField(auto_now_add=True)

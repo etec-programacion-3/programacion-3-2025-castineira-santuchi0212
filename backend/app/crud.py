@@ -51,11 +51,11 @@ async def delete_posicion(posicion_id: int):
 # ===== FUNCIONES PARA EMPLEADOS =====
 
 async def get_empleado(empleado_id: int):
-    return await Empleado.get_or_none(id=empleado_id).prefetch_related("departamento", "posicion")
+    return await Empleado.get_or_none(id=empleado_id).prefetch_related("departamento", "Posicion")
 
 async def get_empleados(skip: int = 0, limit: int = 100):
     """Obtiene una lista de empleados con paginación"""
-    return await Empleado.all().offset(skip).limit(limit).prefetch_related("departamento", "posicion")
+    return await Empleado.all().offset(skip).limit(limit).prefetch_related("departamento", "Posicion")
 
 async def create_empleado(empleado: dict):
     empleado_obj = await Empleado.create(**empleado)
@@ -66,7 +66,7 @@ async def update_empleado(empleado_id: int, empleado: dict):
     await Empleado.filter(id=empleado_id).update(**empleado)
     empleado_obj = await get_empleado(empleado_id)
     if empleado_obj:
-        await empleado_obj.fetch_related("departamento", "posicion")
+        await empleado_obj.fetch_related("departamento", "Posicion")
     return empleado_obj
 
 async def delete_empleado(empleado_id: int):

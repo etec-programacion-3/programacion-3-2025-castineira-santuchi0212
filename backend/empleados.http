@@ -15,7 +15,7 @@ GET {{baseUrl}}/api/employees?skip=0&limit=10
 Content-Type: {{contentType}}
 
 ### E3. EMPLEADOS - GET un empleado específico
-GET {{baseUrl}}/api/employees/2
+GET {{baseUrl}}/api/employees/9
 Content-Type: {{contentType}}
 
 ### E4. EMPLEADOS - POST crear nuevo empleado (válido)
@@ -96,7 +96,7 @@ Content-Type: {{contentType}}
 }
 
 ### E9. EMPLEADOS - PUT actualizar empleado
-PUT {{baseUrl}}/api/employees/7
+PUT {{baseUrl}}/api/employees/9
 Content-Type: {{contentType}}
 
 {
@@ -117,7 +117,7 @@ Content-Type: {{contentType}}
 }
 
 ### E11. EMPLEADOS - DELETE eliminar empleado
-DELETE {{baseUrl}}/api/employees/5
+DELETE {{baseUrl}}/api/employees/9
 Content-Type: {{contentType}}
 
 ### E12. EMPLEADOS - DELETE empleado que no existe (FALLA - 404)
