@@ -49,12 +49,8 @@ class EmpleadoSchema(Schema):
     activo = fields.Bool(required=False, load_default=True)
     
     # IDs de las relaciones
-    departamento_id = fields.Int(required=True)
-    posicion_id = fields.Int(required=True)
-    
-    # Objetos anidados (solo para serialización de salida)
-    departamento = fields.Nested(DepartamentoSchema, dump_only=True)
-    posicion = fields.Nested(PosicionSchema, dump_only=True)
+    departamento = fields.Nested(DepartamentoSchema)
+    posicion = fields.Nested(PosicionSchema)
     
     # Timestamps
     creado_en = fields.DateTime(dump_only=True)
@@ -73,22 +69,20 @@ class EmpleadoCreateSchema(Schema):
     telefono = fields.Str(required=False, allow_none=True, validate=validate.Length(max=20))
     fecha_nacimiento = fields.Date(required=False, allow_none=True)
     fecha_contratacion = fields.Date(required=True)
-    salario = fields.Decimal(required=True, places=2, validate=validate.Range(min=0))
+    salario = fields.Float(required=True, places=2, validate=validate.Range(min=0))
     activo = fields.Bool(required=False, load_default=True)
     departamento_id = fields.Int(required=True)
     posicion_id = fields.Int(required=True)
 
-
 class EmpleadoUpdateSchema(Schema):
-    """Schema para actualizar empleados - campos opcionales"""
     codigo_empleado = fields.Str(required=False, validate=validate.Length(min=1))
-    nombre = fields.Str(required=False, validate=validate.Length(min=1, max=50))
-    apellido = fields.Str(required=False, validate=validate.Length(min=1, max=50))
+    nombre = fields.Str(required=True, validate=validate.Length(min=1, max=50))
+    apellido = fields.Str(required=True, validate=validate.Length(min=1, max=50))
     email = fields.Email(required=False)
     telefono = fields.Str(required=False, allow_none=True, validate=validate.Length(max=20))
     fecha_nacimiento = fields.Date(required=False, allow_none=True)
     fecha_contratacion = fields.Date(required=False)
-    salario = fields.Decimal(required=False, places=2, validate=validate.Range(min=0))
-    activo = fields.Bool(required=False)
+    salario = fields.Float(required=True, places=2, validate=validate.Range(min=0))
+    activo = fields.Bool(required=False, load_default=True)
     departamento_id = fields.Int(required=False)
     posicion_id = fields.Int(required=False)

@@ -3,7 +3,7 @@ from fastapi import FastAPI
 
 TORTOISE_ORM = {
     "connections": {
-        "default": "sqlite://products.db"
+        "default": "sqlite://empleados.db"
     },
     "apps": {
         "models": {

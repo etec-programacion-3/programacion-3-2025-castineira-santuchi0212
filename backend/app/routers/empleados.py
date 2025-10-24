@@ -3,12 +3,13 @@ from typing import List
 from marshmallow import ValidationError
 
 from app import crud
-from app.schemas import EmpleadoSchema, EmpleadoCreateSchema
+from app.schemas import EmpleadoSchema, EmpleadoCreateSchema, EmpleadoUpdateSchema
 
 router = APIRouter()
 empleado_schema = EmpleadoSchema()
 empleados_schema = EmpleadoSchema(many=True)
 empleado_create_schema = EmpleadoCreateSchema()
+empleado_update_schema = EmpleadoUpdateSchema()
 
 @router.get("/", response_model=List[dict])
 async def read_empleados(skip: int = 0, limit: int = 100):
@@ -22,8 +23,8 @@ async def read_empleados(skip: int = 0, limit: int = 100):
 @router.get("/{empleado_id}", response_model=dict)
 async def read_empleado(empleado_id: int):
     """
-    GET /api/positions/{id}
-    Obtiene una posición específica por su ID
+    GET /api/employees/{id}
+    Obtiene un empleado específica por su ID
     """
     db_empleado = await crud.get_empleado(empleado_id=empleado_id)
     if db_empleado is None:
@@ -33,14 +34,16 @@ async def read_empleado(empleado_id: int):
 @router.post("/", response_model=dict, status_code=201)
 async def create_empleado(empleado_data: dict):
     """
-    POST /api/positions
-    Crea una nueva posición con validación de datos
+    POST /api/employees
+    Crea un nuevo empleado con validación de datos
     - El título es requerido y no puede estar vacío
     - La descripción y salarios son opcionales
     """
     try:
         # Validar y deserializar datos de entrada
+        print("empleado_data:", empleado_data)
         data = empleado_create_schema.load(empleado_data)
+        print("Validated data:", data)
     except ValidationError as err:
         raise HTTPException(status_code=400, detail=err.messages)
     
@@ -50,13 +53,13 @@ async def create_empleado(empleado_data: dict):
 @router.put("/{empleado_id}", response_model=dict)
 async def update_empleado(empleado_id: int, empleado_data: dict):
     """
-    PUT /api/positions/{id}
-    Actualiza una posición existente con validación de datos
+    PUT /api/employees/{id}
+    Actualiza un empleado existente con validación de datos
     - El título no puede estar vacío si se envía
     """
     try:
         # Validar y deserializar datos de entrada
-        data = empleado_create_schema.load(empleado_data)
+        data = empleado_update_schema.load(empleado_data)
     except ValidationError as err:
         raise HTTPException(status_code=400, detail=err.messages)
     
@@ -68,8 +71,8 @@ async def update_empleado(empleado_id: int, empleado_data: dict):
 @router.delete("/{empleado_id}")
 async def delete_empleado(empleado_id: int):
     """
-    DELETE /api/positions/{id}
-    Elimina una posición por su ID
+    DELETE /api/employees/{id}
+    Elimina un empleado por su ID
     """
     success = await crud.delete_empleado(empleado_id=empleado_id)
     if not success:

@@ -51,18 +51,10 @@ class Empleado(Model):
     salario = fields.DecimalField(max_digits=10, decimal_places=2)
     activo = fields.BooleanField(default=True)
     
-    # Relaciones ForeignKey
-    departamento: fields.ForeignKeyRelation[Departamento] = fields.ForeignKeyField(
-        "models.Departamento",  # Referencia al modelo Departamento
-        related_name="empleados",  # Permite departamento.empleados
-        on_delete=fields.RESTRICT  # Protege si tiene empleados
-    )
-    
-    posicion: fields.ForeignKeyRelation[Posicion] = fields.ForeignKeyField(
-        "models.Posicion",  # Referencia al modelo Posicion
-        related_name="empleados",  # Permite posicion.empleados
-        on_delete=fields.RESTRICT  # Protege si tiene empleados
-    )
+    ##Relaciones ForeignKey
+
+    departamento = fields.ForeignKeyField('models.Departamento', related_name='empleados')
+    posicion = fields.ForeignKeyField('models.Posicion', related_name='empleados')
     
     # Timestamps
     creado_en = fields.DatetimeField(auto_now_add=True)
@@ -78,13 +70,3 @@ class Empleado(Model):
     def nombre_completo(self):
         return f"{self.nombre} {self.apellido}"
 
-
-# Tu modelo Product original (corregido para Tortoise)
-class Product(Model):
-    id = fields.IntField(pk=True, generated=True)
-    empleado = fields.CharField(max_length=255)
-    Departamento = fields.CharField(max_length=255)
-    Posicion = fields.TextField()
-    
-    class Meta:
-        table = "Registro"
