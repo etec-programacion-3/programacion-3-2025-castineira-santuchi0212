@@ -50,7 +50,7 @@ class EmpleadoSchema(Schema):
     
     # IDs de las relaciones
     departamento = fields.Nested(DepartamentoSchema)
-    ##posicion_id = fields.Int(required=True)
+    posicion = fields.Nested(PosicionSchema)
     
     # Timestamps
     creado_en = fields.DateTime(dump_only=True)
@@ -72,3 +72,17 @@ class EmpleadoCreateSchema(Schema):
     salario = fields.Float(required=True, places=2, validate=validate.Range(min=0))
     activo = fields.Bool(required=False, load_default=True)
     departamento_id = fields.Int(required=True)
+    posicion_id = fields.Int(required=True)
+
+class EmpleadoUpdateSchema(Schema):
+    codigo_empleado = fields.Str(required=False, validate=validate.Length(min=1))
+    nombre = fields.Str(required=True, validate=validate.Length(min=1, max=50))
+    apellido = fields.Str(required=True, validate=validate.Length(min=1, max=50))
+    email = fields.Email(required=False)
+    telefono = fields.Str(required=False, allow_none=True, validate=validate.Length(max=20))
+    fecha_nacimiento = fields.Date(required=False, allow_none=True)
+    fecha_contratacion = fields.Date(required=False)
+    salario = fields.Float(required=True, places=2, validate=validate.Range(min=0))
+    activo = fields.Bool(required=False, load_default=True)
+    departamento_id = fields.Int(required=False)
+    posicion_id = fields.Int(required=False)

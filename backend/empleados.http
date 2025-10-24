@@ -32,7 +32,8 @@ Content-Type: {{contentType}}
   "fecha_contratacion": "2025-03-01",
   "salario": 3500.50,
   "activo": true,
-  "departamento_id": 1
+  "departamento_id": 1,
+  "posicion_id": 2
 }
 
 ### E5. EMPLEADOS - POST crear otro empleado
@@ -46,7 +47,8 @@ Content-Type: {{contentType}}
   "email": "luis.martinez@example.com",
   "fecha_contratacion": "2025-04-15",
   "salario": 2800,
-  "departamento_id": 2
+  "departamento_id": 2,
+  "posicion_id": 1
 }
 
 ### E6. EMPLEADOS - POST validación (FALLA - falta email)
@@ -94,13 +96,12 @@ Content-Type: {{contentType}}
 }
 
 ### E9. EMPLEADOS - PUT actualizar empleado
-PUT {{baseUrl}}/api/employees/4
+PUT {{baseUrl}}/api/employees/7
 Content-Type: {{contentType}}
 
 {
   "nombre": "Ana María",
   "apellido": "González",
-  "email": "ana.m.gonzalez@example.com",
   "telefono": "+541198765432",
   "salario": 3500.75
 
@@ -116,7 +117,7 @@ Content-Type: {{contentType}}
 }
 
 ### E11. EMPLEADOS - DELETE eliminar empleado
-DELETE {{baseUrl}}/api/employees/2
+DELETE {{baseUrl}}/api/employees/5
 Content-Type: {{contentType}}
 
 ### E12. EMPLEADOS - DELETE empleado que no existe (FALLA - 404)

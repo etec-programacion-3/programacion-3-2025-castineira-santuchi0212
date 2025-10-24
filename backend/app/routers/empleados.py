@@ -3,12 +3,13 @@ from typing import List
 from marshmallow import ValidationError
 
 from app import crud
-from app.schemas import EmpleadoSchema, EmpleadoCreateSchema
+from app.schemas import EmpleadoSchema, EmpleadoCreateSchema, EmpleadoUpdateSchema
 
 router = APIRouter()
 empleado_schema = EmpleadoSchema()
 empleados_schema = EmpleadoSchema(many=True)
 empleado_create_schema = EmpleadoCreateSchema()
+empleado_update_schema = EmpleadoUpdateSchema()
 
 @router.get("/", response_model=List[dict])
 async def read_empleados(skip: int = 0, limit: int = 100):
@@ -58,7 +59,7 @@ async def update_empleado(empleado_id: int, empleado_data: dict):
     """
     try:
         # Validar y deserializar datos de entrada
-        data = empleado_create_schema.load(empleado_data)
+        data = empleado_update_schema.load(empleado_data)
     except ValidationError as err:
         raise HTTPException(status_code=400, detail=err.messages)
     
