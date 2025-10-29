@@ -76,8 +76,8 @@ class EmpleadoCreateSchema(Schema):
 
 class EmpleadoUpdateSchema(Schema):
     codigo_empleado = fields.Str(required=False, validate=validate.Length(min=1))
-    nombre = fields.Str(required=True, validate=validate.Length(min=1, max=50))
-    apellido = fields.Str(required=True, validate=validate.Length(min=1, max=50))
+    nombre = fields.Str(required=False, validate=validate.Length(min=1, max=50))
+    apellido = fields.Str(required=False, validate=validate.Length(min=1, max=50))
     email = fields.Email(required=False)
     telefono = fields.Str(required=False, allow_none=True, validate=validate.Length(max=20))
     fecha_nacimiento = fields.Date(required=False, allow_none=True)
