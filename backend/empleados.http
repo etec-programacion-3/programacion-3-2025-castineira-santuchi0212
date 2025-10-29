@@ -15,7 +15,7 @@ GET {{baseUrl}}/api/employees?skip=0&limit=10
 Content-Type: {{contentType}}
 
 ### E3. EMPLEADOS - GET un empleado específico
-GET {{baseUrl}}/api/employees/9
+GET {{baseUrl}}/api/employees/13
 Content-Type: {{contentType}}
 
 ### E4. EMPLEADOS - POST crear nuevo empleado (válido)
@@ -33,10 +33,10 @@ Content-Type: {{contentType}}
   "salario": 3500.50,
   "activo": true,
   "departamento_id": 1,
-  "posicion_id": 2
+  "Posicion_id": 2
 }
 
-### E5. EMPLEADOS - POST crear otro empleado
+### E#. EMPLEADOS - POST crear otro empleado
 POST {{baseUrl}}/api/employees
 Content-Type: {{contentType}}
 
@@ -48,7 +48,22 @@ Content-Type: {{contentType}}
   "fecha_contratacion": "2025-04-15",
   "salario": 2800,
   "departamento_id": 2,
-  "posicion_id": 1
+  "Posicion_id": 1
+}
+
+### E#. EMPLEADOS - POST crear otro empleado
+POST {{baseUrl}}/api/employees
+Content-Type: {{contentType}}
+
+{
+  "codigo_empleado": "EMP003",
+  "nombre": "Carlos",
+  "apellido": "Gonzalez",
+  "email": "carlos.Gonzalez@example.com",
+  "fecha_contratacion": "2025-04-15",
+  "salario": 3200,
+  "departamento_id": 3,
+  "Posicion_id": 4
 }
 
 ### E6. EMPLEADOS - POST validación (FALLA - falta email)

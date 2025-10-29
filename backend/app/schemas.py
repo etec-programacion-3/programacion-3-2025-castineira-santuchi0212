@@ -50,7 +50,7 @@ class EmpleadoSchema(Schema):
     
     # IDs de las relaciones
     departamento = fields.Nested(DepartamentoSchema)
-    posicion = fields.Nested(PosicionSchema)
+    Posicion = fields.Nested(PosicionSchema)
     
     # Timestamps
     creado_en = fields.DateTime(dump_only=True)
@@ -72,7 +72,7 @@ class EmpleadoCreateSchema(Schema):
     salario = fields.Float(required=True, places=2, validate=validate.Range(min=0))
     activo = fields.Bool(required=False, load_default=True)
     departamento_id = fields.Int(required=True)
-    posicion_id = fields.Int(required=True)
+    Posicion_id = fields.Int(required=True)
 
 class EmpleadoUpdateSchema(Schema):
     codigo_empleado = fields.Str(required=False, validate=validate.Length(min=1))
@@ -85,4 +85,4 @@ class EmpleadoUpdateSchema(Schema):
     salario = fields.Float(required=True, places=2, validate=validate.Range(min=0))
     activo = fields.Bool(required=False, load_default=True)
     departamento_id = fields.Int(required=False)
-    posicion_id = fields.Int(required=False)
+    Posicion_id = fields.Int(required=False)

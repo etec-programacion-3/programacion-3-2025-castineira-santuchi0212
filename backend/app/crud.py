@@ -59,14 +59,14 @@ async def get_empleados(skip: int = 0, limit: int = 100):
 
 async def create_empleado(empleado: dict):
     empleado_obj = await Empleado.create(**empleado)
-    await empleado_obj.fetch_related("departamento", "posicion")
+    await empleado_obj.fetch_related("departamento", "Posicion")
     return empleado_obj
 
 async def update_empleado(empleado_id: int, empleado: dict):
     await Empleado.filter(id=empleado_id).update(**empleado)
     empleado_obj = await get_empleado(empleado_id)
     if empleado_obj:
-        await empleado_obj.fetch_related("departamento", "Posicion")
+        await empleado_obj.fetch_related("departamento", "Posicion")    
     return empleado_obj
 
 async def delete_empleado(empleado_id: int):
