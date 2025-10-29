@@ -33,7 +33,7 @@ Content-Type: {{contentType}}
   "salario": 3500.50,
   "activo": true,
   "departamento_id": 1,
-  "posicion_id": 2
+  "Posicion_id": 2
 }
 
 ### E5. EMPLEADOS - POST crear otro empleado
@@ -48,7 +48,22 @@ Content-Type: {{contentType}}
   "fecha_contratacion": "2025-04-15",
   "salario": 2800,
   "departamento_id": 2,
-  "posicion_id": 1
+  "Posicion_id": 1
+}
+
+### E5. EMPLEADOS - POST crear otro empleado
+POST {{baseUrl}}/api/employees
+Content-Type: {{contentType}}
+
+{
+  "codigo_empleado": "EMP003",
+  "nombre": "Carlos",
+  "apellido": "Gonzalez",
+  "email": "carlos.gonzalez@example.com",
+  "fecha_contratacion": "2025-04-15",
+  "salario": 2800,
+  "departamento_id": 2,
+  "Posicion_id": 1
 }
 
 ### E6. EMPLEADOS - POST validación (FALLA - falta email)
@@ -96,14 +111,14 @@ Content-Type: {{contentType}}
 }
 
 ### E9. EMPLEADOS - PUT actualizar empleado
-PUT {{baseUrl}}/api/employees/7
+PUT {{baseUrl}}/api/employees/12
 Content-Type: {{contentType}}
 
 {
-  "nombre": "Ana María",
-  "apellido": "González",
-  "telefono": "+541198765432",
-  "salario": 3500.75
+  "nombre": "Carlos",
+  "apellido": "Gonzalez",
+  "departamento_id": 3,
+  "Posicion_id": 4
 
 }
 
