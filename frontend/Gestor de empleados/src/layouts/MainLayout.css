@@ -1,0 +1,133 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px 20px;
+}
+
+.logo h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.logo p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.main-nav {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 5px;
+}
+
+.main-nav li {
+  margin: 0;
+}
+
+.main-nav a {
+  display: block;
+  padding: 16px 24px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.main-nav a.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-bottom-color: white;
+  font-weight: 600;
+}
+
+.layout-main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.layout-footer {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border-top: 2px solid #667eea40;
+  padding: 30px 20px;
+  margin-top: 40px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content h4 {
+  color: #667eea;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-content li {
+  padding: 10px 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.footer-content strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: 20px;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-nav ul {
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
+
+  .main-nav a {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  .layout-main {
+    padding: 20px 10px;
+  }
+}
