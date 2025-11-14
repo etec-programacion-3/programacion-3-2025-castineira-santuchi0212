@@ -1,4 +1,4 @@
-from tortoise import fields, models
+from tortoise import fields
 from tortoise.models import Model
 
 
@@ -51,8 +51,7 @@ class Empleado(Model):
     salario = fields.DecimalField(max_digits=10, decimal_places=2)
     activo = fields.BooleanField(default=True)
     
-    ##Relaciones ForeignKey
-
+    # Relaciones ForeignKey
     departamento = fields.ForeignKeyField('models.Departamento', related_name='empleados')
     Posicion = fields.ForeignKeyField('models.Posicion', related_name='empleados')
     
@@ -69,3 +68,22 @@ class Empleado(Model):
     @property
     def nombre_completo(self):
         return f"{self.nombre} {self.apellido}"
+
+
+class User(Model):
+    """Modelo para Usuario del sistema"""
+    id = fields.IntField(pk=True, generated=True)
+    username = fields.CharField(max_length=50, unique=True)
+    email = fields.CharField(max_length=100, unique=True)
+    full_name = fields.CharField(max_length=100, null=True)
+    hashed_password = fields.CharField(max_length=255)
+    is_active = fields.BooleanField(default=True)
+    is_superuser = fields.BooleanField(default=False)
+    creado_en = fields.DatetimeField(auto_now_add=True)
+    actualizado_en = fields.DatetimeField(auto_now=True)
+    
+    class Meta:
+        table = "users"
+    
+    def __str__(self):
+        return self.username
