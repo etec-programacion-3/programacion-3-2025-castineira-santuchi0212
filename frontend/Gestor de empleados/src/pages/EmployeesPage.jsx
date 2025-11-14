@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { employeeService } from '../services/employeeService';
+import './EmployeesPage.css';
+import EmployeeForm from '../components/forms/EmployeeForm';
 import DataTable from '../components/DataTable';
+import { employeeService } from '../services/employeeService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
-import EmployeeForm from '../components/forms/EmployeeForm';
 import './Page.css';
-import './EmployeesPage.css';
 
 const EmployeesPage = () => {
   const [employees, setEmployees] = useState([]);
@@ -217,11 +217,15 @@ const EmployeesPage = () => {
       <div className="page-header">
         <div>
           <h1>👥 Empleados</h1>
-          <p>Listado completo de empleados registrados en el sistema</p>
+          <p>Listado y gestión de empleados</p>
         </div>
-        <button onClick={handleCreate} className="btn-create">
-          + Nuevo Empleado
-        </button>
+
+        <div>
+          {/* botón nuevo empleado: usa la clase btn-naranja */}
+          <button className="btn-naranja" onClick={handleCreate}>
+            + Nuevo Empleado
+          </button>
+        </div>
       </div>
 
       <div className="page-stats">

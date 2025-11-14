@@ -2,24 +2,28 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_db, close_db
-from app.routers import departamentos, posiciones, empleados
+from app.routers import departamentos, posiciones, empleados, auth
+from app.config import settings
 
 app = FastAPI(
     title="Empleados API",
-    description="API para gestionar departamentos y posiciones",
-    version="1.0.0"
+    description="API para gestionar empleados con autenticación JWT",
+    version="2.0.0"
 )
 
 # Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.BACKEND_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Incluir routers
+# Incluir router de autenticación (SIN protección)
+app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
+
+# Incluir routers protegidos
 app.include_router(departamentos.router, prefix="/api/departments", tags=["departments"])
 app.include_router(posiciones.router, prefix="/api/positions", tags=["positions"])
 app.include_router(empleados.router, prefix="/api/employees", tags=["employees"])
@@ -34,4 +38,16 @@ async def shutdown_event():
 
 @app.get("/")
 async def root():
-    return {"message": "Bienvenido a la API de Gestión de Recursos"}
+    return {
+        "message": "API de Gestión de Empleados con JWT",
+        "version": "2.0.0",
+        "auth_endpoints": {
+            "register": "/api/auth/register",
+            "login": "/api/auth/login",
+            "me": "/api/auth/me"
+        }
+    }
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
