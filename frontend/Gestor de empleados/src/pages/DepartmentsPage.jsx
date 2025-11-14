@@ -3,12 +3,16 @@ import { departmentService } from '../services/employeeService';
 import DataTable from '../components/DataTable';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
+import DepartmentForm from '../components/forms/DepartmentForm';
 import './Page.css';
 
 const DepartmentsPage = () => {
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // nuevo estado para mostrar el formulario
+  const [showForm, setShowForm] = useState(false);
 
   const fetchDepartments = async () => {
     try {
@@ -26,6 +30,20 @@ const DepartmentsPage = () => {
   useEffect(() => {
     fetchDepartments();
   }, []);
+
+  // manejadores para el formulario
+  const openForm = () => setShowForm(true);
+  const closeForm = () => setShowForm(false);
+
+  // función que DepartmentForm llamará para crear/actualizar
+  const handleSubmit = async (formData) => {
+    // delegar a service y luego refrescar lista / cerrar modal
+    const created = await departmentService.create(formData);
+    // cerrar y refrescar lista después de crear/guardar
+    setShowForm(false);
+    await fetchDepartments();
+    return created;
+  };
 
   // Definición de columnas para la tabla reutilizable
   const columns = [
@@ -63,8 +81,17 @@ const DepartmentsPage = () => {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1>🏢 Departamentos</h1>
-        <p>Gestión de departamentos de la organización</p>
+        <div>
+          <h1>🏢 Departamentos</h1>
+          <p>Gestión de departamentos de la organización</p>
+        </div>
+
+        {/* botón para abrir formulario */}
+        <div>
+          <button className="btn btn-primary" onClick={openForm}>
+            + Agregar Departamento
+          </button>
+        </div>
       </div>
 
       <div className="page-stats">
@@ -79,6 +106,15 @@ const DepartmentsPage = () => {
         columns={columns}
         emptyMessage="No hay departamentos registrados"
       />
+
+      {/* modal sencillo para el formulario */}
+      {showForm && (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <DepartmentForm onCancel={closeForm} onSubmit={handleSubmit} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

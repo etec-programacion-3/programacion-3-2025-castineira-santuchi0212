@@ -1,169 +1,86 @@
-.home-page {
-  max-width: 100%;
-}
+.home-page { max-width: 100%; }
 
-.welcome-section {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.welcome-section h2 {
-  font-size: 2.5rem;
-  color: #1f2937;
-  margin-bottom: 10px;
-}
-
-.welcome-section p {
-  font-size: 1.2rem;
-  color: #6b7280;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  margin-bottom: 40px;
-}
-
-.stat-card-link {
-  text-decoration: none;
-  display: block;
-  transition: transform 0.2s;
-}
-
-.stat-card-link:hover {
-  transform: translateY(-5px);
-}
-
-.stat-card {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.stat-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.stat-card.employees {
-  border-color: #667eea;
-}
-
-.stat-card.employees:hover {
-  background: linear-gradient(135deg, #667eea05 0%, #764ba205 100%);
-}
-
-.stat-card.departments {
-  border-color: #10b981;
-}
-
-.stat-card.departments:hover {
-  background: linear-gradient(135deg, #10b98105 0%, #05966905 100%);
-}
-
-.stat-card.positions {
-  border-color: #f59e0b;
-}
-
-.stat-card.positions:hover {
-  background: linear-gradient(135deg, #f59e0b05 0%, #d9770605 100%);
-}
-
-.stat-icon {
-  font-size: 4rem;
-  margin-bottom: 15px;
-}
-
-.stat-card h3 {
-  font-size: 1.2rem;
-  color: #4b5563;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.stat-number {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: #1f2937;
-  margin: 10px 0;
-}
-
-.stat-detail {
-  color: #9ca3af;
-  font-size: 0.9rem;
-}
-
-.quick-actions {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.quick-actions h3 {
-  font-size: 1.5rem;
-  color: #1f2937;
+/* hero */
+.page-hero{
+  padding: 24px 12px;
   margin-bottom: 20px;
+  text-align: center;
+  background: transparent;
 }
 
-.action-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+.page-hero h1{
+  margin:0 0 8px 0;
+  font-size:34px;
+  color: var(--text);
 }
 
-.action-button {
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.2s;
-  display: inline-block;
+/* dashboard grid */
+.dashboard-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-bottom: 26px;
 }
 
-.action-button.primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+/* stat card */
+.stat-card{
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 28px 20px;
+  box-shadow: 0 8px 28px rgba(16,24,32,0.06);
+  border: 2px solid rgba(16,24,32,0.04);
+  color: var(--text);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  min-height:200px;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.stat-card:focus,
+.stat-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(16,24,32,0.12);
 }
 
-.action-button.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+/* accent borders */
+.stat-card--blue{ border-color: rgba(30,144,255,0.18); }
+.stat-card--green{ border-color: rgba(46,204,113,0.18); }
+.stat-card--orange{ border-color: rgba(255,122,0,0.18); }
+
+.stat-icon{
+  font-size:48px;
+  line-height:1;
+  padding:8px;
+  background:transparent;
+  border-radius:8px;
 }
 
-.action-button.secondary {
-  background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+.stat-card .stat-title{
+  font-weight:700;
+  color:var(--muted);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-top:8px;
 }
 
-.action-button.secondary:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-2px);
+.stat-card .stat-value{
+  font-size:44px;
+  font-weight:800;
+  color:var(--text);
+  margin-top:6px;
 }
 
-@media (max-width: 768px) {
-  .welcome-section h2 {
-    font-size: 1.8rem;
-  }
+.stat-card .stat-link{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:0.95rem;
+}
 
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
+/* remove quick actions styles if present (keeps page clean) */
+.quick-actions{ display:none; }
 
-  .action-buttons {
-    flex-direction: column;
-  }
-
-  .action-button {
-    width: 100%;
-    text-align: center;
-  }
+@media (max-width:800px){
+  .page-hero h1{ font-size:26px }
+  .dashboard-grid{ gap:14px }
 }
