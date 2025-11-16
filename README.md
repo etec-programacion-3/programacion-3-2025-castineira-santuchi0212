@@ -38,15 +38,8 @@ Instalación y ejecución (Backend)
    pip install -r requirements.txt
    ```
 
-4. (Opcional) Configurar variables de entorno
-   - Por defecto el backend puede usar SQLite local. Si quieres cambiar:
-     ```bash
-     export DATABASE_URL="sqlite:///./dev.db"
-     export SECRET_KEY="cambia-esto-por-una-clave-secreta"
-     ```
-   - Revisa `backend/app/config.py` si necesitas parámetros adicionales (CORS, tiempo de expiración del token, etc).
 
-5. Inicializar la base de datos:
+4. Inicializar la base de datos:
    - Si existe `init_db.py`:
      ```bash
      python init_db.py
@@ -57,12 +50,11 @@ Instalación y ejecución (Backend)
      ```
      (Sigue las instrucciones en pantalla si el script las solicita).
 
-6. Iniciar el servidor de desarrollo:
+5. Iniciar el servidor de desarrollo:
    ```bash
    python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 5000
    ```
    - La API estará en: `http://localhost:5000`
-   - Swagger UI: `http://localhost:5000/docs` (si FastAPI lo habilita)
 
 Instalación y ejecución (Frontend)
 ---------------------------------
